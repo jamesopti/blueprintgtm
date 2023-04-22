@@ -16,10 +16,6 @@ const publishedDocPath = "/published/df3lyebptj85svu";
 // const publishedDocPath = "/published/srdcvjfw933pv12";
 
 
-
-
-
-
 const app = express();
 app.set('etag', false)
 app.use((req, res, next) => {
@@ -51,6 +47,7 @@ const baseProxy = proxy(basePath, {
 });
 
 app.get('/', baseProxy);
+app.get('/published/*', baseProxy);
 app.get("*", resourceProxy);
 
 
