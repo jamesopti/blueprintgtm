@@ -22,7 +22,6 @@ const server = https.createServer(opts, app);
 
 app.set('etag', false)
 app.use((req, res, next) => {
-  res.setHeader('Cache-Control', 'no-store')
   res.setHeader('Surrogate-Control', 'no-store');
   res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
   res.setHeader('Pragma', 'no-cache');
@@ -44,19 +43,13 @@ const resourceProxy = proxy(basePath, {
 const baseProxy = proxy(basePath, {
   memoizeHost: false,
   proxyReqPathResolver: req => "/published/srdcvjfw933pv12",
-  proxyReqOptDecorator: function(proxyReqOpts, srcReq) {
-    // you can update headers
-    // proxyReqOpts.headers['Content-Type'] = 'text/html';
-    // proxyReqOpts.headers['upgrade-insecure-requests'] = '0';
-    // console.log(proxyReqOpts.headers)
-    return proxyReqOpts;
-  },
-  userResDecorator: (proxyRes, proxyResData, userReq, userRes) => {
-    const $ = cheerio.load(proxyResData.toString('utf8'));
-    // console.log($.html());
-    $('head').prepend(`<base href="${basePath}">`);
-    return $.html();
-  }
+  // userResDecorator: (proxyRes, proxyResData, userReq, userRes) => {
+  //   console.log('Inserting base tag')
+  //   const $ = cheerio.load(proxyResData.toString('utf8'));
+  //   // console.log($.html());
+  //   $('head').prepend(`<base href="${basePath}">`);
+  //   return $.html();
+  // }
 });
 
 app.get('/', baseProxy);
