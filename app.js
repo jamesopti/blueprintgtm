@@ -7,7 +7,7 @@ const port = process.env.PORT || 3001;
 
 
 // TEST DOC https://gamma-cdx8ch7ft-gamma-app.vercel.app/published/df3lyebptj85svu
-const basePath = "https://gamma-cdx8ch7ft-gamma-app.vercel.app";
+const basePath = "https://gamma-b25f2p2us-gamma-app.vercel.app";
 const publishedDocPath = "/published/df3lyebptj85svu";
 
 // https://gamma-ahig3gpbv-gamma-app.vercel.app/published/srdcvjfw933pv12
@@ -48,6 +48,10 @@ const baseProxy = proxy(basePath, {
 
 app.get('/', baseProxy);
 app.get('/published/*', baseProxy);
+app.get('/_next/*/*.js', (req, res, next) => {
+  res.type('.js');
+  res.send("/* EMPTY */");
+});
 app.get("*", resourceProxy);
 
 
