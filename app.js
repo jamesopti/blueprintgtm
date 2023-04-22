@@ -1,4 +1,5 @@
 const cheerio = require('cheerio');
+const fs = require('fs');
 const express = require("express");
 const https = require('https');
 const proxy = require('express-http-proxy');
@@ -6,19 +7,6 @@ const port = process.env.PORT || 3001;
 
 const app = express();
 const basePath = "https://gamma-ahig3gpbv-gamma-app.vercel.app"
-
-const opts = {};
-
-if (!process.env.PORT) {
-  const fs = require('fs');
-  const key = fs.readFileSync('../../gamma/certificates/localhost-key.pem');
-  const cert = fs.readFileSync('../../gamma/certificates/localhost.pem');
-  opts.cert = cert;
-  opts.key = key;
-}
-
-
-const server = https.createServer(opts, app);
 
 app.set('etag', false)
 app.use((req, res, next) => {
@@ -55,5 +43,20 @@ const baseProxy = proxy(basePath, {
 app.get('/', baseProxy);
 app.get("*", resourceProxy);
 
-server.listen(port, () => console.log(`Example app listening on port ${port}!`));
+
+
+if (!process.env.PORT) {
+  const opts = {
+    key: fs.readFileSync('../../gamma/certificates/localhost-key.pem'),
+    cert: fs.readFileSync('../../gamma/certificates/localhost.pem')
+  };
+  const server = https.createServer(opts, app);
+  server.listen(port, () => console.log(`Example app listening on port ${port}!`));
+} else {
+  app.listen(port, () => console.log(`Example app listening on port ${port}!`));
+}
+
+
+
+
 
