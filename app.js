@@ -7,24 +7,24 @@ const port = process.env.PORT || 3001;
 
 
 // TEST DOC https://gamma-b25f2p2us-gamma-app.vercel.app/published/df3lyebptj85svu
-const basePath = "https://gamma-cdx8ch7ft-gamma-app.vercel.app";
-const publishedDocPath = "/published/df3lyebptj85svu";
+// const basePath = "https://gamma-cdx8ch7ft-gamma-app.vercel.app";
+// const publishedDocPath = "/published/df3lyebptj85svu";
 
 // https://gamma-ahig3gpbv-gamma-app.vercel.app/published/srdcvjfw933pv12
 // https://gamma.app/published/srdcvjfw933pv12
-// const basePath = "https://gamma-ahig3gpbv-gamma-app.vercel.app"
-// const publishedDocPath = "/published/srdcvjfw933pv12";
+const basePath = "https://gamma-ahig3gpbv-gamma-app.vercel.app"
+const publishedDocPath = "/published/srdcvjfw933pv12";
 
 
 const app = express();
-app.set('etag', false)
-app.use((req, res, next) => {
-  res.setHeader('Surrogate-Control', 'no-store');
-  res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
-  res.setHeader('Pragma', 'no-cache');
-  res.setHeader('Expires', '0');
-  next()
-})
+// app.set('etag', false)
+// app.use((req, res, next) => {
+//   res.setHeader('Surrogate-Control', 'no-store');
+//   res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
+//   res.setHeader('Pragma', 'no-cache');
+//   res.setHeader('Expires', '0');
+//   next()
+// })
 
 
 const resourceProxy = proxy(basePath, {
@@ -47,7 +47,7 @@ const baseProxy = proxy(basePath, {
 });
 
 app.get('/', baseProxy);
-app.get('/published/*', baseProxy);
+// app.get('/published/*', baseProxy);
 app.get('/_next/*/*.js', (req, res, next) => {
   res.type('.js');
   res.send("/* EMPTY */");
