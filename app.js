@@ -1,3 +1,4 @@
+const UAParser = require('ua-parser-js');
 const cheerio = require('cheerio');
 const fs = require('fs');
 const express = require("express");
@@ -5,6 +6,10 @@ const https = require('https');
 const proxy = require('express-http-proxy');
 const port = process.env.PORT || 3001;
 
+// NEXT13.3 DOC https://gamma-3sgqa6bhz-gamma-app.vercel.app/published/aja14yxp49263ux
+const basePath = "https://gamma-3sgqa6bhz-gamma-app.vercel.app"
+const publishedDocPath = "/published/aja14yxp49263ux";
+const publishedDocPathMobile = "/published_mobile/aja14yxp49263ux";
 
 // TEST DOC https://gamma-b25f2p2us-gamma-app.vercel.app/published/df3lyebptj85svu
 // const basePath = "https://gamma-cdx8ch7ft-gamma-app.vercel.app";
@@ -12,8 +17,9 @@ const port = process.env.PORT || 3001;
 
 // https://gamma-ahig3gpbv-gamma-app.vercel.app/published/srdcvjfw933pv12
 // https://gamma.app/published/srdcvjfw933pv12
-const basePath = "https://gamma-ahig3gpbv-gamma-app.vercel.app"
-const publishedDocPath = "/published/srdcvjfw933pv12";
+// const basePath = "https://gamma-ahig3gpbv-gamma-app.vercel.app"
+// const publishedDocPath = "/published/srdcvjfw933pv12";
+// const publishedDocPathMobile = "/published_mobile/srdcvjfw933pv12";
 
 
 const app = express();
@@ -28,30 +34,34 @@ const app = express();
 
 
 const resourceProxy = proxy(basePath, {
-  memoizeHost: false,
   proxyReqPathResolver: req => {
     return req.url
   }
 });
 
 const baseProxy = proxy(basePath, {
-  memoizeHost: false,
-  proxyReqPathResolver: req => publishedDocPath,
-  // userResDecorator: (proxyRes, proxyResData, userReq, userRes) => {
-  //   console.log('Inserting base tag')
-  //   const $ = cheerio.load(proxyResData.toString('utf8'));
-  //   // console.log($.html());
-  //   $('head').prepend(`<base href="${basePath}">`);
-  //   return $.html();
-  // }
+  proxyReqPathResolver: req => {
+    const parser = new UAParser(req.headers['user-agent']);
+    const isMobile = parser.getDevice().type === 'mobile'
+    console.log('ROOT REQUEST. IS MOBILE: ', isMobile)
+
+    return isMobile ? publishedDocPathMobile : publishedDocPath;
+  },
+  userResDecorator: (proxyRes, proxyResData, userReq, userRes) => {
+    console.log('Inserting base tag')
+    const $ = cheerio.load(proxyResData.toString('utf8'));
+    // console.log($.html());
+    $('head').prepend(`<base href="${basePath}">`);
+    return $.html();
+  }
 });
 
 app.get('/', baseProxy);
 // app.get('/published/*', baseProxy);
-app.get('/_next/*/*.js', (req, res, next) => {
-  res.type('.js');
-  res.send("/* EMPTY */");
-});
+// app.get('/_next/*/*.js', (req, res, next) => {
+//   res.type('.js');
+//   res.send("/* EMPTY */");
+// });
 app.get("*", resourceProxy);
 
 
@@ -66,8 +76,4 @@ if (!process.env.PORT) {
 } else {
   app.listen(port, () => console.log(`Example app listening on port ${port}!`));
 }
-
-
-
-
 
