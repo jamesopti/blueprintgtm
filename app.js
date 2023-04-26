@@ -7,9 +7,9 @@ const proxy = require('express-http-proxy');
 const port = process.env.PORT || 3001;
 
 // NEXT13.3 DOC https://gamma-3sgqa6bhz-gamma-app.vercel.app/published/aja14yxp49263ux
-const basePath = "https://gamma-3sgqa6bhz-gamma-app.vercel.app"
-const publishedDocPath = "/published/aja14yxp49263ux";
-const publishedDocPathMobile = "/published_mobile/aja14yxp49263ux";
+// const basePath = "https://gamma-3sgqa6bhz-gamma-app.vercel.app"
+// const publishedDocPath = "/published/aja14yxp49263ux";
+// const publishedDocPathMobile = "/published_mobile/aja14yxp49263ux";
 
 // TEST DOC https://gamma-b25f2p2us-gamma-app.vercel.app/published/df3lyebptj85svu
 // const basePath = "https://gamma-cdx8ch7ft-gamma-app.vercel.app";
@@ -17,9 +17,9 @@ const publishedDocPathMobile = "/published_mobile/aja14yxp49263ux";
 
 // https://gamma-ahig3gpbv-gamma-app.vercel.app/published/srdcvjfw933pv12
 // https://gamma.app/published/srdcvjfw933pv12
-// const basePath = "https://gamma-ahig3gpbv-gamma-app.vercel.app"
-// const publishedDocPath = "/published/srdcvjfw933pv12";
-// const publishedDocPathMobile = "/published_mobile/srdcvjfw933pv12";
+const basePath = "https://gamma-ahig3gpbv-gamma-app.vercel.app"
+const publishedDocPath = "/published/srdcvjfw933pv12";
+const publishedDocPathMobile = "/published_mobile/srdcvjfw933pv12";
 
 
 const app = express();
@@ -50,7 +50,6 @@ const baseProxy = proxy(basePath, {
   userResDecorator: (proxyRes, proxyResData, userReq, userRes) => {
     console.log('Inserting base tag')
     const $ = cheerio.load(proxyResData.toString('utf8'));
-    // console.log($.html());
     $('head').prepend(`<base href="${basePath}">`);
     return $.html();
   }
