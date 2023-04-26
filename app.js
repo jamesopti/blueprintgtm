@@ -6,10 +6,10 @@ const https = require('https');
 const proxy = require('express-http-proxy');
 const port = process.env.PORT || 3001;
 
-// NEXT13.3 DOC https://gamma-3sgqa6bhz-gamma-app.vercel.app/published/aja14yxp49263ux
-// const basePath = "https://gamma-3sgqa6bhz-gamma-app.vercel.app"
-// const publishedDocPath = "/published/aja14yxp49263ux";
-// const publishedDocPathMobile = "/published_mobile/aja14yxp49263ux";
+// NEXT13.3 DOC https://gamma-3sgqa6bhz-gamma-app.vercel.app/published/cr3hu3hvm5vlk52
+const basePath = "https://gamma-3sgqa6bhz-gamma-app.vercel.app"
+const publishedDocPath = "/published/cr3hu3hvm5vlk52";
+const publishedDocPathMobile = "/published_mobile/cr3hu3hvm5vlk52";
 
 // TEST DOC https://gamma-b25f2p2us-gamma-app.vercel.app/published/df3lyebptj85svu
 // const basePath = "https://gamma-cdx8ch7ft-gamma-app.vercel.app";
@@ -17,9 +17,9 @@ const port = process.env.PORT || 3001;
 
 // https://gamma-ahig3gpbv-gamma-app.vercel.app/published/srdcvjfw933pv12
 // https://gamma.app/published/srdcvjfw933pv12
-const basePath = "https://gamma-ahig3gpbv-gamma-app.vercel.app"
-const publishedDocPath = "/published/srdcvjfw933pv12";
-const publishedDocPathMobile = "/published_mobile/srdcvjfw933pv12";
+// const basePath = "https://gamma-ahig3gpbv-gamma-app.vercel.app"
+// const publishedDocPath = "/published/srdcvjfw933pv12";
+// const publishedDocPathMobile = "/published_mobile/srdcvjfw933pv12";
 
 
 const app = express();
