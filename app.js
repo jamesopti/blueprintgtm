@@ -43,9 +43,9 @@ const baseProxy = proxy(basePath, {
   proxyReqPathResolver: req => {
     const parser = new UAParser(req.headers['user-agent']);
     const isMobile = parser.getDevice().type === 'mobile'
-    console.log('ROOT REQUEST. IS MOBILE: ', isMobile)
+    // console.log('ROOT REQUEST. IS MOBILE: ', isMobile)
 
-    return isMobile ? publishedDocPathMobile : publishedDocPath;
+    return publishedDocPath;
   },
   // userResDecorator: (proxyRes, proxyResData, userReq, userRes) => {
   //   console.log('Inserting base tag')
