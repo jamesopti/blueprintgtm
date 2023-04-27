@@ -7,7 +7,7 @@ const proxy = require('express-http-proxy');
 const port = process.env.PORT || 3001;
 
 // NEXT13.3 DOC https://gamma-3sgqa6bhz-gamma-app.vercel.app/published/cr3hu3hvm5vlk52
-const basePath = "https://gamma-3sgqa6bhz-gamma-app.vercel.app"
+const basePath = "https://gamma-o7p3zxvjp-gamma-app.vercel.app"
 const publishedDocPath = "/published/cr3hu3hvm5vlk52";
 const publishedDocPathMobile = "/published_mobile/cr3hu3hvm5vlk52";
 
@@ -47,12 +47,12 @@ const baseProxy = proxy(basePath, {
 
     return isMobile ? publishedDocPathMobile : publishedDocPath;
   },
-  userResDecorator: (proxyRes, proxyResData, userReq, userRes) => {
-    console.log('Inserting base tag')
-    const $ = cheerio.load(proxyResData.toString('utf8'));
-    $('head').prepend(`<base href="${basePath}">`);
-    return $.html();
-  }
+  // userResDecorator: (proxyRes, proxyResData, userReq, userRes) => {
+  //   console.log('Inserting base tag')
+  //   const $ = cheerio.load(proxyResData.toString('utf8'));
+  //   $('head').prepend(`<base href="${basePath}">`);
+  //   return $.html();
+  // }
 });
 
 app.get('/', baseProxy);
