@@ -6,10 +6,15 @@ const https = require('https');
 const proxy = require('express-http-proxy');
 const port = process.env.PORT || 3001;
 
-// NEXT13.3 DOC https://gamma-3sgqa6bhz-gamma-app.vercel.app/published/cr3hu3hvm5vlk52
+// STAGING COPY OF JORDANS DOC https://gamma-o7p3zxvjp-gamma-app.vercel.app/published/6veodwb3uxwijkk
 const basePath = "https://gamma-o7p3zxvjp-gamma-app.vercel.app"
-const publishedDocPath = "/published/cr3hu3hvm5vlk52";
-const publishedDocPathMobile = "/published_mobile/cr3hu3hvm5vlk52";
+const publishedDocPath = "/published/6veodwb3uxwijkk";
+const publishedDocPathMobile = "/published_mobile/6veodwb3uxwijkk";
+
+// NEXT13.3 DOC https://gamma-3sgqa6bhz-gamma-app.vercel.app/published/cr3hu3hvm5vlk52
+// const basePath = "https://gamma-o7p3zxvjp-gamma-app.vercel.app"
+// const publishedDocPath = "/published/cr3hu3hvm5vlk52";
+// const publishedDocPathMobile = "/published_mobile/cr3hu3hvm5vlk52";
 
 // TEST DOC https://gamma-b25f2p2us-gamma-app.vercel.app/published/df3lyebptj85svu
 // const basePath = "https://gamma-cdx8ch7ft-gamma-app.vercel.app";
