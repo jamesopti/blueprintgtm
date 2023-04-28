@@ -6,8 +6,14 @@ const https = require('https');
 const proxy = require('express-http-proxy');
 const port = process.env.PORT || 3001;
 
+// Production JORDANS doc (in jordans account) with CardLayouts https://gamma.app/published/scy0bu8wud73i7h
+// const basePath = "https://gamma.app"
+// const publishedDocPath = "/published/scy0bu8wud73i7h";
+// const publishedDocPathMobile = "/published_mobile/scy0bu8wud73i7h";
+
 // STAGING JORDANS DOC with card layouts: https://gamma-o7p3zxvjp-gamma-app.vercel.app/published/h99feggmjbq1ljl
-const basePath = "https://gamma-o7p3zxvjp-gamma-app.vercel.app"
+const basePath = "https://gamma-c3h6xel26-gamma-app.vercel.app"
+// const basePath = "https://staging.gamma.app"
 const publishedDocPath = "/published/h99feggmjbq1ljl";
 const publishedDocPathMobile = "/published_mobile/h99feggmjbq1ljl";
 
@@ -67,9 +73,10 @@ const baseProxy = proxy(basePath, {
 
 app.get('/', baseProxy);
 // app.get('/published/*', baseProxy);
-// app.get('/_next/*/*.js', (req, res, next) => {
-//   res.type('.js');
-//   res.send("/* EMPTY */");
+// app.get('/_next/static/*/**', (req, res, next) => {
+//   // res.type('.js');
+//   // res.send("/* EMPTY */");
+//   res.status(404).send('intentionally omitted')
 // });
 app.get("*", resourceProxy);
 
