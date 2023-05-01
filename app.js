@@ -11,8 +11,8 @@ const port = process.env.PORT || 3001;
 // const publishedDocPath = "/published/scy0bu8wud73i7h";
 // const publishedDocPathMobile = "/published_mobile/scy0bu8wud73i7h";
 
-// STAGING JORDANS DOC with card layouts: https://gamma-o7p3zxvjp-gamma-app.vercel.app/published/h99feggmjbq1ljl
-const basePath = "https://gamma-ozdkb3svv-gamma-app.vercel.app"
+// STAGING JORDANS DOC with card layouts: https://gamma-ps4bospk4-gamma-app.vercel.app/published/h99feggmjbq1ljl
+const basePath = "https://gamma-ps4bospk4-gamma-app.vercel.app"
 // const basePath = "https://staging.gamma.app"
 const publishedDocPath = "/published/h99feggmjbq1ljl";
 const publishedDocPathMobile = "/published_mobile/h99feggmjbq1ljl";
@@ -48,10 +48,15 @@ const app = express();
 //   next()
 // })
 
-
 const resourceProxy = proxy(basePath, {
   proxyReqPathResolver: req => {
     return req.url
+  }
+});
+
+const resourceProxy2 = proxy(basePath, {
+  proxyReqPathResolver: req => {
+    return basePath + publishedDocPath + req.url
   }
 });
 
