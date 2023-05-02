@@ -12,7 +12,7 @@ const port = process.env.PORT || 3001;
 // const publishedDocPathMobile = "/published_mobile/scy0bu8wud73i7h";
 
 // STAGING JORDANS DOC with card layouts: https://gamma-ps4bospk4-gamma-app.vercel.app/published/h99feggmjbq1ljl
-const basePath = "https://gamma-l2mln71gg-gamma-app.vercel.app"
+const basePath = "https://gamma-bys92faqb-gamma-app.vercel.app"
 // const basePath = "https://staging.gamma.app"
 const publishedDocPath = "/published/h99feggmjbq1ljl";
 const publishedDocPathMobile = "/published_mobile/h99feggmjbq1ljl";
