@@ -68,13 +68,13 @@ const baseProxy = proxy(basePath, {
 
     return publishedDocPath;
   },
-  userResDecorator: (proxyRes, proxyResData, userReq, userRes) => {
-    console.log('Inserting base tag')
-    const $ = cheerio.load(proxyResData.toString('utf8'));
-    // console.log($.html());
-    $('head').prepend(`<base href="${basePath}">`);
-    return $.html();
-  }
+  // userResDecorator: (proxyRes, proxyResData, userReq, userRes) => {
+  //   console.log('Inserting base tag')
+  //   const $ = cheerio.load(proxyResData.toString('utf8'));
+  //   // console.log($.html());
+  //   $('head').prepend(`<base href="${basePath}">`);
+  //   return $.html();
+  // }
 });
 
 app.get('/', baseProxy);
